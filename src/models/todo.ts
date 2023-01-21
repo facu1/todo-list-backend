@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import { ITodo } from "../types";
 
-const todoSchema = new Schema({
+const todoSchema = new Schema<ITodo>({
   title: {
     type: String,
     required: true,

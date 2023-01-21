@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import { IUser } from "../types";
 
-const userSchema = new Schema({
+const userSchema = new Schema<IUser>({
   externalId: {
     type: String,
     required: true,
