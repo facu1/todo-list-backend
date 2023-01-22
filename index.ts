@@ -1,18 +1,12 @@
-import express from "express";
-import cors from "cors";
+import http from "http";
 import { connectDb } from "./src/db";
 import { config } from "./src/config";
-import todoRouter from "./src/routes/todo";
-import { jwtCheck } from "./src/utils";
-
-const app = express();
+import app from "./src/app";
 
 void connectDb();
 
-app.use(cors());
-app.use(jwtCheck);
-app.use("/api/todos", todoRouter);
+const server = http.createServer(app);
 
-app.listen(config.PORT, () => {
-  console.info("server started on port 3000");
+server.listen(config.PORT, () => {
+  console.info(`server started on port ${config.PORT}`);
 });
