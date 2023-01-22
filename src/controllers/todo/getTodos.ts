@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { User } from "../../models";
 import { IUser } from "../../types";
-import { NotAuthSubError } from "../../customErrors";
+import { NotAuthSubError } from "../../utils/customErrors";
 
 export const getTodos = async (
   req: Request,

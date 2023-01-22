@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { NotAuthSubError, NotUserFindError } from "../customErrors";
+import { NotAuthSubError, NotUserFindError } from "./customErrors";
 import { UnauthorizedError } from "express-jwt";
 
 export const unknownEndpoint = (_req: Request, res: Response) => {

@@ -2,7 +2,7 @@ import { NextFunction, Response } from "express";
 import { Request } from "express-jwt";
 import { Todo, User } from "../../models";
 import { IUser } from "../../types";
-import { NotAuthSubError, NotUserFindError } from "../../customErrors";
+import { NotAuthSubError, NotUserFindError } from "../../utils/customErrors";
 
 export const addTestTodo = async (
   req: Request,
