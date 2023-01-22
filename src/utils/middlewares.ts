@@ -12,7 +12,6 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.info(error);
   if (error instanceof UnauthorizedError) {
     res.status(401).json({ error: error.message });
   } else if (error instanceof NotAuthSubError) {
