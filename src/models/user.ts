@@ -15,8 +15,8 @@ const userSchema = new Schema<IUser>({
 });
 
 userSchema.set("toJSON", {
-  transform: (_document, returnedObject) => {
-    returnedObject.id = String(returnedObject._id);
+  transform: (_document, returnedObject: IUser) => {
+    returnedObject.id = returnedObject._id;
     delete returnedObject._id;
     delete returnedObject.__v;
   },

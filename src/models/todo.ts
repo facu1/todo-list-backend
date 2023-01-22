@@ -12,12 +12,13 @@ const todoSchema = new Schema<ITodo>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
 });
 
 todoSchema.set("toJSON", {
-  transform: (_document, returnedObject) => {
-    returnedObject.id = String(returnedObject._id);
+  transform: (_document, returnedObject: ITodo) => {
+    returnedObject.id = returnedObject._id;
     delete returnedObject._id;
     delete returnedObject.__v;
   },

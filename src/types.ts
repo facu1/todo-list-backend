@@ -1,11 +1,11 @@
-import { Types } from "mongoose";
+import { Document, Types } from "mongoose";
 
-export interface IUser {
+export interface IUser extends Document<Types.ObjectId> {
   externalId: string;
   todos: Types.ObjectId[];
 }
 
-export interface ITodo {
+export interface ITodo extends Document<Types.ObjectId> {
   title: string;
   description?: string;
   user: Types.ObjectId;
