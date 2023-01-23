@@ -1,36 +1,20 @@
 import { NextFunction, Response } from "express";
-import { Request } from "express-jwt";
-import { User } from "../../models";
-import { IUser } from "../../types";
-import { NotAuthSubError } from "../../utils/customErrors";
+import { RequestWithEIDU } from "../../types";
+import { UserNotFoundError } from "../../utils";
 
 export const getTodos = async (
-  req: Request,
+  req: RequestWithEIDU,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { auth } = req;
+    const { user } = req;
 
-    if (!auth?.sub) throw new NotAuthSubError("Authentication not found");
+    if (!user) throw new UserNotFoundError();
 
-    const { sub: externalId } = auth;
+    const userPopulated = await user.populate("todos");
 
-    let user = await User.findOne<IUser>({
-      externalId,
-    }).populate("todos");
-
-    if (!user) {
-      const newUser = new User({
-        externalId,
-      });
-
-      const addedUser: IUser = await newUser.save();
-
-      user = addedUser;
-    }
-
-    res.json(user.todos);
+    res.json(userPopulated.todos);
   } catch (error) {
     next(error);
   }

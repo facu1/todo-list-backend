@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { config } from "./config";
+import config from "./config";
 
-export const connectDb = async () => {
+const connectDb = async () => {
   try {
     mongoose.set("strictQuery", false);
     await mongoose.connect(config.MONGO_URI);
@@ -11,3 +11,5 @@ export const connectDb = async () => {
     console.error(error);
   }
 };
+
+export default connectDb;

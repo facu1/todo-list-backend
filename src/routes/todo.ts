@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { addTestTodo, getTodos } from "../controllers";
+import { addTodo, editTodo, getTodos, removeTodo } from "../controllers";
+import { extractTodo, userExtractor } from "../utils/middlewares";
 
-const todoRouter = Router();
+export const todoRouter = Router();
 
+todoRouter.use(userExtractor);
 todoRouter.get("/", getTodos);
-todoRouter.post("/", addTestTodo);
-
-export default todoRouter;
+todoRouter.post("/", addTodo);
+todoRouter.put("/:id", extractTodo, editTodo);
+todoRouter.delete("/:id", extractTodo, removeTodo);

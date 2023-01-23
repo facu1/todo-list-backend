@@ -1,6 +1,6 @@
 import { expressjwt, GetVerificationKey } from "express-jwt";
 import jwks from "jwks-rsa";
-import { config } from "../config";
+import config from "../config";
 
 export const jwtCheck = expressjwt({
   secret: jwks.expressJwtSecret({

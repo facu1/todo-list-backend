@@ -1,8 +1,8 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export const config = {
-  PORT: process.env.PORT,
+const config = {
+  PORT: process.env.PORT || 3000,
   MONGO_URI: process.env.MONGO_URI || "",
   AUTH0: {
     JWKSURI: process.env.JWKSURI || "",
@@ -10,3 +10,5 @@ export const config = {
     ISSUER: process.env.ISSUER || "",
   },
 };
+
+export default config;

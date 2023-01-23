@@ -1,2 +1,2 @@
+export * from "./customErrors";
 export * from "./jwtCheck";
-export * from "./middlewares";

@@ -1,7 +1,7 @@
+import connectDb from "./src/db";
 import http from "http";
-import { connectDb } from "./src/db";
-import { config } from "./src/config";
 import app from "./src/app";
+import config from "./src/config";
 
 void connectDb();
 

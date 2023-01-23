@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
-import todoRouter from "./routes/todo";
-import { errorHandler, jwtCheck, unknownEndpoint } from "./utils";
+import { jwtCheck } from "./utils";
+import { todoRouter } from "./routes";
+import { errorHandler, unknownEndpoint } from "./utils/middlewares";
 
 const app = express();
 
