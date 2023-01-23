@@ -16,6 +16,7 @@ export const toNewTodo = ({ title, description }: NewTodoFields): NewTodo => {
     title: parseTitle(title),
     description: parseDescription(description),
     state: TodoState.Pending,
+    created: new Date().toISOString(),
   };
 
   return newTodo;

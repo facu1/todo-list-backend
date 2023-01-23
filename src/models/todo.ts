@@ -13,6 +13,13 @@ const todoSchema = new Schema<ITodo>({
     type: String,
     required: true,
   },
+  created: {
+    type: String,
+    required: true,
+  },
+  dateOfCompleted: {
+    type: String,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

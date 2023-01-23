@@ -1,7 +1,8 @@
 import { NextFunction, Response } from "express";
-import { EditStateTodoFields, RequestWithEIDU, TodoState } from "../../types";
-import { InvalidTodoStateChangeError, TodoNotFoundError } from "../../utils";
+import { EditStateTodoFields, RequestWithEIDU } from "../../types";
+import { TodoNotFoundError } from "../../utils";
 import { toEditStateTodo } from "../../utils/bodyParsers";
+import { stateChangeValidator } from "./utils";
 
 export const editStateTodo = async (
   req: RequestWithEIDU,
@@ -15,30 +16,9 @@ export const editStateTodo = async (
 
     const editedTodo = toEditStateTodo(req.body as EditStateTodoFields);
 
-    if (
-      todo.state === TodoState.Pending &&
-      editedTodo.state === TodoState["In Progress"]
-    ) {
-      todo.state = editedTodo.state;
+    const validatedTodo = await stateChangeValidator(todo, editedTodo);
 
-      const savedTodo = await todo.save();
-
-      res.json(savedTodo);
-    } else if (
-      todo.state === TodoState["In Progress"] &&
-      (editedTodo.state === TodoState.Completed ||
-        editedTodo.state === TodoState.Pending)
-    ) {
-      todo.state = editedTodo.state;
-
-      const savedTodo = await todo.save();
-
-      res.json(savedTodo);
-    } else if (todo.state !== editedTodo.state) {
-      throw new InvalidTodoStateChangeError();
-    } else {
-      res.json(todo);
-    }
+    res.json(validatedTodo);
   } catch (error) {
     next(error);
   }

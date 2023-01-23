@@ -16,21 +16,28 @@ export interface ITodo extends Document<Types.ObjectId> {
   title: string;
   description?: string;
   state: TodoState;
+  created: string;
+  dateOfCompleted?: string;
   user: Types.ObjectId;
 }
 
-export type NewTodo = Pick<ITodo, "title" | "description" | "state">;
+export type NewTodo = Pick<
+  ITodo,
+  "title" | "description" | "state" | "created" | "dateOfCompleted"
+>;
 
 export interface NewTodoFields {
   title: unknown;
   description?: unknown;
 }
 
-export interface EditTodo extends Omit<NewTodo, "title"> {
+export interface EditTodo
+  extends Omit<NewTodo, "title" | "created" | "dateOfCompleted"> {
   title?: string;
 }
 
-export interface EditTodoFields extends Omit<NewTodoFields, "title"> {
+export interface EditTodoFields
+  extends Omit<NewTodoFields, "title" | "created" | "dateOfCompleted"> {
   title?: unknown;
 }
 
