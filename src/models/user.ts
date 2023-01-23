@@ -6,6 +6,10 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true,
   },
+  deletedTodos: {
+    type: Number,
+    required: true,
+  },
   todos: [
     {
       type: Schema.Types.ObjectId,

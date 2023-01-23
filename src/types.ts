@@ -3,6 +3,7 @@ import { Document, Types } from "mongoose";
 
 export interface IUser extends Document<Types.ObjectId> {
   externalId: string;
+  deletedTodos: number;
   todos: Types.ObjectId[];
 }
 

@@ -15,6 +15,7 @@ export const removeTodo = async (
     else if (!todo) throw new TodoNotFoundError();
 
     user.todos = user.todos.filter((t) => String(t._id) !== String(todo._id));
+    user.deletedTodos += 1;
 
     await user.save();
     await Todo.findByIdAndDelete(todo._id);

@@ -18,9 +18,7 @@ export const userExtractor = async (
     let user = await User.findOne<IUser>({ externalId }).populate("todos");
 
     if (!user) {
-      const newUser = new User({
-        externalId,
-      });
+      const newUser = new User({ externalId, deletedTodos: 0 });
 
       const addedUser: IUser = await newUser.save();
 
