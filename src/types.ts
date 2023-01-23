@@ -6,13 +6,20 @@ export interface IUser extends Document<Types.ObjectId> {
   todos: Types.ObjectId[];
 }
 
+export enum TodoState {
+  "Pending" = "Pending",
+  "In Progress" = "In Progress",
+  "Completed" = "Completed",
+}
+
 export interface ITodo extends Document<Types.ObjectId> {
   title: string;
   description?: string;
+  state: TodoState;
   user: Types.ObjectId;
 }
 
-export type NewTodo = Pick<ITodo, "title" | "description">;
+export type NewTodo = Pick<ITodo, "title" | "description" | "state">;
 
 export interface NewTodoFields {
   title: unknown;

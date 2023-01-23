@@ -1,4 +1,4 @@
-import { NewTodo, NewTodoFields } from "../../../types";
+import { NewTodo, NewTodoFields, TodoState } from "../../../types";
 import { isString } from "../typeGuards";
 import { parseDescription } from "./sharedParsers";
 
@@ -15,6 +15,7 @@ export const toNewTodo = ({ title, description }: NewTodoFields): NewTodo => {
   const newTodo: NewTodo = {
     title: parseTitle(title),
     description: parseDescription(description),
+    state: TodoState.Pending,
   };
 
   return newTodo;

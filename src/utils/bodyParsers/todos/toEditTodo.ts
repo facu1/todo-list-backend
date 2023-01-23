@@ -1,4 +1,4 @@
-import { EditTodo, EditTodoFields } from "../../../types";
+import { EditTodo, EditTodoFields, TodoState } from "../../../types";
 import { baseErrorMsg } from "../baserErrorMsg";
 import { isString } from "../typeGuards";
 import { parseDescription } from "./sharedParsers";
@@ -18,6 +18,7 @@ export const toEditTodo = ({
   const editTodo: EditTodo = {
     title: parseTitle(title),
     description: parseDescription(description),
+    state: TodoState.Pending,
   };
 
   return editTodo;

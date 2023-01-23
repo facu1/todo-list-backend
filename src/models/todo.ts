@@ -9,6 +9,10 @@ const todoSchema = new Schema<ITodo>({
   description: {
     type: String,
   },
+  state: {
+    type: String,
+    required: true,
+  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
