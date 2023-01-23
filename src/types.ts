@@ -34,6 +34,14 @@ export interface EditTodoFields extends Omit<NewTodoFields, "title"> {
   title?: unknown;
 }
 
+export interface EditStateTodo {
+  state?: TodoState;
+}
+
+export interface EditStateTodoFields {
+  state?: unknown;
+}
+
 export type RequestWithEIDU = Request & {
   user?: IUser;
   todo?: ITodo;

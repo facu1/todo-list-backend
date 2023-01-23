@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UnauthorizedError } from "express-jwt";
 import {
+  InvalidTodoStateChangeError,
   NotAuthActionError,
   NotAuthSubError,
   TodoNotFoundError,
@@ -23,6 +24,8 @@ export const errorHandler = (
     res.status(400).json({ error: `User not found.` });
   } else if (error instanceof TodoNotFoundError) {
     res.status(400).json({ error: `Todo not found.` });
+  } else if (error instanceof InvalidTodoStateChangeError) {
+    res.status(400).json({ error: `Invalid todo state change.` });
   } else if (error instanceof Error) {
     res.status(400).json({ error: error.message });
   } else {
