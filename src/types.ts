@@ -51,6 +51,7 @@ export interface EditStateTodoFields {
 }
 
 export type RequestWithEIDU = Request & {
+  externalId?: string;
   user?: IUser;
   todo?: ITodo;
 };

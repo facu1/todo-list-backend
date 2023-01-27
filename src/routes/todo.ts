@@ -6,10 +6,15 @@ import {
   // editTodo,
   removeTodo,
 } from "../controllers";
-import { extractTodo, userExtractor } from "../utils/middlewares";
+import {
+  extractTodo,
+  tokenExtractor,
+  userExtractor,
+} from "../utils/middlewares";
 
 export const todoRouter = Router();
 
+todoRouter.use(tokenExtractor);
 todoRouter.use(userExtractor);
 todoRouter.get("/", getTodos);
 todoRouter.post("/", addTodo);

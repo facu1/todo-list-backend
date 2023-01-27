@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import { IUser, RequestWithEIDU } from "../../types";
 import { User } from "../../models";
-import { NotAuthSubError } from "../customErrors";
+import { NotAuthSubError, UserNotFoundError } from "../customErrors";
 
 export const userExtractor = async (
   req: RequestWithEIDU,
@@ -9,21 +9,13 @@ export const userExtractor = async (
   next: NextFunction
 ) => {
   try {
-    const { auth } = req;
+    const { externalId } = req;
 
-    if (!auth?.sub) throw new NotAuthSubError();
+    if (!externalId) throw new NotAuthSubError();
 
-    const { sub: externalId } = auth;
+    const user = await User.findOne<IUser>({ externalId });
 
-    let user = await User.findOne<IUser>({ externalId }).populate("todos");
-
-    if (!user) {
-      const newUser = new User({ externalId, deletedTodos: 0 });
-
-      const addedUser: IUser = await newUser.save();
-
-      user = addedUser;
-    }
+    if (!user) throw new UserNotFoundError();
 
     req.user = user;
 

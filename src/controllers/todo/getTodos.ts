@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import { Todo } from "../../models";
 import { RequestWithEIDU } from "../../types";
 import { UserNotFoundError } from "../../utils";
 
@@ -12,9 +13,9 @@ export const getTodos = async (
 
     if (!user) throw new UserNotFoundError();
 
-    const userPopulated = await user.populate("todos");
+    const todos = await Todo.find({ user: user._id });
 
-    res.json(userPopulated.todos);
+    res.json(todos);
   } catch (error) {
     next(error);
   }
